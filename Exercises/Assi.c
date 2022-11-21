@@ -11,17 +11,11 @@
 int main(void)
 {
     pid_t child_pid, my_pid;
-    int status;
+    int status, val;
     char *argv[] = {"/bin/ls", "-l", "/tmp/", NULL};
 
     my_pid = getpid();
-    printf("Before execve\n");
-    if (execve(argv[0], argv, NULL) == -1)
-    {
-        perror("Error:");
-    }
-    printf("After execve\n");
-
+  
     child_pid = fork();
     if (child_pid == -1)
     {
@@ -31,8 +25,12 @@ int main(void)
     printf("%u\n", my_pid);
     if (child_pid == 0)
     {
-        printf("Wait for me, wait for me\n");
-        sleep(3);
+    val = execve(argv[0], argv, NULL);
+    if (val == -1)
+    {
+        perror("Error:");
+    }
+    printf("Wait for me, wait for me\n");
     }
     else
     {
