@@ -1,19 +1,21 @@
 #include "shell.h"
+#include <stddef.h>
 
 /**
-  * main - G8S_Sh
-  * @argc: argument count
-  * @argv: argument vector
-  * Return: Always 0
-  */
+ * main - run shell
+ * @argc : argument length
+ * @argv: array of argument value
+ * @env: array of environment variable
+ * Return: 0 on success
+ */
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **env)
 {
-	int counter;
+	char *buf = NULL;
+	size_t buflen = 0;
+	char *cmd[20];
 
-	char *prompt = "(G8S_sh) $ ";
-
-	printf("%s", prompt);
-
+	(void)argc;
+	REPL(buf, buflen, cmd, argv, env);
 	return (0);
 }
